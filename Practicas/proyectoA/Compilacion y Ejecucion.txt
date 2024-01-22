@@ -1,0 +1,13 @@
+
+Programación Orientada a Objetos
+-------------------------------------
+Album Fotografico.
+-------------------------------------
+Compilación:
+
+javac Album.java
+-------------------------------------
+Ejecución:
+
+java Album
+-------------------------------------

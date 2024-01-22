@@ -1,0 +1,672 @@
+
+
+//BOCANEGRA HEZIQUIO YESTLANEZI 		PROGRAMACIÓN ORIENTADA A OBJETOS 		2CM13 
+
+/* Problema 1 */
+
+import java.util.Scanner;
+
+public class Hilo{
+
+    public static void main(String[] args) {                                                 
+            
+            int rolloCompleto = 200;
+            Tela tela = new Tela(200);
+            Scanner sc = new Scanner(System.in);
+            System.out.println("*****Telas*****");
+            System.out.println("La longitud del carrete es de: "+ rolloCompleto);
+
+        while(tela.getRollo()>0){    
+            System.out.println("Ingrese la cantida de metros que desea cortar: ");
+            
+            int cortar = sc.nextInt();
+            tela.cortarTela(cortar);
+            System.out.println("Usted corto: "+cortar+ "m" );
+            System.out.println("El carrete ahora tiene: " + tela.getRollo()+"m");
+        }    
+    }
+}
+
+public class Tela{
+        int rollo;
+
+        public Tela(int rollo){
+            this.rollo = rollo;
+        }
+
+        public void setRollo(int rollo){
+            this.rollo = rollo; 
+
+        }
+
+        public int getRollo(){
+            return this.rollo; 
+        }
+
+        public void cortarTela(int cantidad){
+            this.setRollo(this.getRollo()-cantidad);  
+        }
+}
+
+
+
+
+/* Problema 2*/
+Defina el TAD para una cuenta bancaria sencilla en java.
+Aqui esta la "especificación"
+
+Cuando se abre la cuenta el cuentahabiente hace su 1er deposito (es
+decir deposita una cantidad de dinero inicial).
+
+Podemos:
+-Retirar dinero de esta cuenta.
+-Depositar dinero de esta cuenta.
+-Consultar el saldo (es decir el cuentahabiente puede preguntar cuánto
+dinero hay en su cuenta.
+*/
+
+
+//Cajero 
+
+//Nombres de clases siempre va con mayuscula la primera 
+
+	public class Cajero{
+	
+		//Atributos 
+		//Abstraer 
+		//Retirar
+		//Depositar 
+		//Consultar 
+		int dinero; 
+
+		//el constructor 
+		public Cajero(int dinero){
+			this.dinero = dinero; // referencia a la clase que tenemos 
+		
+		//Encapsulamiento para proteger los datos 
+		//publico, todo tu proyecto puede accesar a el
+		//private: solo puede acceder desde la misma clase 
+
+		}
+
+		//no vamos a regresar nada 
+		//guardamos el valor del dinero
+		//*Empezamos el nombre del metodo con lo que va a hacer
+		public void setDinero(int dinero){
+			//asignar 
+			this.dinero = dinero; 
+
+		}
+
+		//nos regresa el valor de dinero en entero
+		public int getDinero(){
+			return this.dinero; 
+		}
+
+		//métodos de la clase 
+
+		//*****RETIRAR DINERO******
+		//*************************
+
+		//Realizamos una resta 
+		public void retirarDinero(int cantidad){
+				//ocuamos set
+			this.setDinero(this.getDinero()-cantidad); //necesitamos la cantidad y luego restamos la cantidad solicitada 
+		}
+
+		//*****DEPOSITAR DINERO******
+		//***************************
+
+		public void depositarDinero(int cantidad){
+			this.setDinero(this.getDinero()+cantidad);
+		}
+
+		//*****CONSULTAR SALDO*******
+		//***************************
+		//ya tenemos un metodo que nos regresa el valor del dinero
+
+}
+
+import java.util.Scanner;
+public class Banco{
+	public static void main(String[] args){
+	//String args: son valores que puedes poner desde la consola 
+		//System.out.println: para escribibr 
+		//ojeto de scaner 
+		//instancia de una clase: primero va la clase que se va a instanciar 
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Bienvenido a mi Banco Oz"); //llora denso si no le pones ;
+		System.out.println("Debes depositar dinero");
+		//System.out.println("Al ser cliente nuevo debe ");
+		//lo usamos 
+		//sc.nextInt; //leer la linea 
+		//recibir el dinero que depositamos primero 
+		//ncesitamos guardar el dato 
+		//se guarda en una variable 
+		//se pueden declarar variables donde sea 
+		int inicial = sc.nextInt(); 
+		//guardar en la cuenta 
+		//instanciar dinero 
+		//mandas a llamar a cajero
+		
+		Cajero cajero = new Cajero(inicial); //asignandole un valor para que la clase se inicialice con ese valor 
+		System.out.println("Elija una opcion del menu");
+		System.out.println("1. Retirar dinero");
+		System.out.println("2. Depositar dinero");
+		System.out.println("3. Consultar saldo");
+
+		int opcion = sc.nextInt(); //variable para menu
+		switch(opcion){	
+
+			case 1: 
+				System.out.println("Cuanto dinero deseas retirar");
+				int retiro = sc.nextInt(); 
+				//mandamos a llamar a cajero 
+				cajero.retirarDinero(retiro);
+				System.out.println("Retiro "+retiro+ " y le quedan "+cajero.getDinero()+" en su cuenta");
+				break; 
+
+			case 2:
+				System.out.println("Cuanto dinero deseas depositar");
+				int deposito = sc.nextInt(); 
+				//mandamos a llamar a cajero 
+				cajero.depositarDinero(deposito);
+				System.out.println("Deposito "+deposito+ " y ahora tiene "+cajero.getDinero()+" en su cuenta");
+				break; 
+
+			case 3:
+				System.out.println("La cantidad que tienes en tu cuenta es: " +cajero.getDinero());
+				break; 
+
+			default: System.out.println("Elija una opcion correcta");
+		}
+
+	}
+
+
+}
+
+
+
+/* Problema 3*/
+
+import java.awt.event.ActionEvent;
+
+public class CalcularE extends JFrame implements ActionListener{
+	JButton btnc;
+	JLabel etiq;
+	JTextField horas,min,seg;
+	int n1,n2,n3,res;
+	
+	public CalcularE(){
+		setLayout(null);
+		
+		btnc = new JButton ("Calcular");
+    		btnc.setBounds(200,50,100,30);
+		etiq = new JLabel("0");
+    		etiq.setBounds(350,50,100,30);
+		horas = new JTextField (5);
+    		horas.setBounds(50,50,30,30);
+    		min = new JTextField (5);
+    		min.setBounds(100,50,30,30);
+    		seg = new JTextField (5);
+    		seg.setBounds(150,50,30,30);
+		n1 = 0;
+		n2 = 0;
+		n3 = 0;
+		add(btnc); add(etiq); add(horas); add(min); add(seg);
+		btnc.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		n1 = Integer.parseInt(horas.getText());
+		n2 = Integer.parseInt(min.getText());
+		n3 = Integer.parseInt(seg.getText());
+		res = ((n1*3600) + (n2*60) + (n3));
+		String resultado = Integer.toString(res);
+		etiq.setText(resultado);
+	}
+	
+	public static void main (String args[]){
+		CalcularE calc1 = new CalcularE();
+		calc1.setBounds(550,550,500,200);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+
+}
+
+
+
+/* Problema 4 */
+
+import java.awt.event.ActionEvent;
+
+public class CalcularM extends JFrame implements ActionListener{
+	JButton btnc;
+	JLabel etiq1, etiq2;
+	JTextField min;
+	int minuto,dias,horas;
+	
+	public CalcularM(){
+		setLayout(null);
+		
+		btnc = new JButton ("Calcular");
+    		btnc.setBounds(200,50,100,30);
+		
+		etiq1 = new JLabel("0");
+    		etiq1.setBounds(350,50,100,30);
+    	
+    		etiq2 = new JLabel("0");
+    		etiq2.setBounds(420,50,100,30);
+		
+    		min = new JTextField (5);
+    		min.setBounds(100,50,50,30);
+    	
+    		minuto = 0;
+		add(btnc); add(etiq1); add(etiq2); add(min);
+		btnc.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		minuto = Integer.parseInt(min.getText());
+
+		dias = minuto/1440;
+		String resultadoDias = Integer.toString(dias);
+		etiq1.setText(resultadoDias);
+
+		horas = minuto/60;
+		String resultadoHoras = Integer.toString(horas);
+		etiq2.setText(resultadoHoras);
+
+	}
+	
+	public static void main (String args[]){
+		CalcularM calc1 = new CalcularM();
+		calc1.setBounds(550,550,500,200);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+
+}
+
+
+
+
+/* Problema 5 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class Conversion extends JFrame implements ActionListener{
+	JButton btnc1, btnc2;
+	JLabel etiq1;
+	JTextField conversion;
+	int op1,op2,numero;
+	//float numero;
+	
+	public Conversion(){
+		setLayout(null);
+		
+		btnc1 = new JButton ("Pesos a Dolares");
+    		btnc1.setBounds(100,50,130,30);
+	
+    		btnc2 = new JButton ("Dolares a Pesos");
+    		btnc2.setBounds(250,50,130,30);
+		
+		etiq1 = new JLabel("0");
+    		etiq1.setBounds(420,50,100,30);
+		
+    		conversion = new JTextField (5);
+    		conversion.setBounds(20,50,50,30);
+    	
+    		op1 = 0;
+    		op2 = 0;
+		add(btnc1); add(btnc2); add(etiq1); add(conversion);
+		btnc1.addActionListener(this);
+		btnc2.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+			
+		if(e.getSource() == btnc1){
+			numero = Integer.parseInt(conversion.getText());
+
+			op1 = numero/20;
+			String pesosDolares =Integer.toString(op1);
+			etiq1.setText(pesosDolares);
+		}
+		
+		if(e.getSource() == btnc2){
+			numero = Integer.parseInt(conversion.getText());
+			op2 = numero*20;
+			String dolaresPesos = Integer.toString(op2);
+			etiq1.setText(dolaresPesos);
+		}	
+	}
+	
+	public static void main (String args[]){
+		Conversion calc1 = new CalcularD();
+		calc1.setBounds(550,550,500,180);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+}
+
+
+
+
+/* Problema 6 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class CompararPalabras extends JFrame implements ActionListener{
+	JButton btnc;
+	JLabel etiq;
+	JTextField palabra1, palabra2;
+	int n1,n2,n3,res;
+	
+	public CompararPalabras(){
+		setLayout(null);
+		
+		btnc = new JButton ("Calcular");
+    		btnc.setBounds(270,50,100,30);
+		etiq = new JLabel("*****");
+    		etiq.setBounds(390,50,100,30);
+		palabra1 = new JTextField (50);
+    		palabra1.setBounds(50,50,80,30);
+    		palabra2 = new JTextField (50);
+    		palabra2.setBounds(160,50,80,30);
+    	
+		add(btnc); add(etiq); add(palabra1); add(palabra2);
+		btnc.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		String s1, s2;
+		s1=palabra1.getText();
+		s2=palabra2.getText();
+		
+		if(s1.equals(s2))
+			etiq.setText("*Si son iguales*");
+		else
+			etiq.setText("*No son iguales*");
+	}
+	
+	public static void main (String args[]){
+		CompararPalabras calc1 = new P6();
+		calc1.setBounds(550,550,500,200);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+
+}
+
+
+
+/* Problema 7 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class CalculoM extends JFrame implements ActionListener{
+	JButton btnc;
+	JLabel etiq;
+	JTextField ani;
+	int num;
+	
+	public P7(){
+		setLayout(null);
+		
+		btnc = new JButton ("Calcular");
+    		btnc.setBounds(26,60,150,30);
+		etiq = new JLabel("0");
+    		etiq.setBounds(80,110,100,30);
+		ani = new JTextField (5);
+    		ani.setBounds(30,15,150,30);
+		num = 0;
+		add(btnc); add(etiq); add(ani);
+		btnc.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		num = Integer.parseInt(ani.getText());
+		num = (2021 - num)+77;
+		String resultado = Integer.toString(num);
+		etiq.setText(resultado);
+	}
+	
+	public static void main (String args[]){
+		CalculoM calc1 = new P7();
+		calc1.setBounds(150,150,200,200);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+
+}
+
+
+
+/* Problema 8 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class Calculadora extends JFrame implements ActionListener{
+	JButton btnc1, btnc2, btnc3, btnc4;
+	JLabel etiq1;
+	JTextField num1, num2;
+	int numero1, numero2, suma, resta, mult, div;
+	//float numero;
+	
+	public P8(){
+		setLayout(null);
+		
+		btnc1 = new JButton ("+");
+    		btnc1.setBounds(160,50,50,30);
+
+    		btnc2 = new JButton ("-");
+    		btnc2.setBounds(230,50,50,30);
+
+    		btnc3 = new JButton ("*");
+    		btnc3.setBounds(300,50,50,30);
+
+    		btnc4 = new JButton ("/");
+    		btnc4.setBounds(370,50,50,30);
+		
+		etiq1 = new JLabel("0");
+    		etiq1.setBounds(450,50,100,30);
+		
+    		num1 = new JTextField (5);
+    		num1.setBounds(20,50,50,30); 
+
+    		num2 = new JTextField (5);
+    		num2.setBounds(90,50,50,30);
+    	
+		add(btnc1); add(btnc2); add(btnc3);add(btnc4); add(etiq1); add(num1); add(num2);
+		btnc1.addActionListener(this);
+		btnc2.addActionListener(this);
+		btnc3.addActionListener(this);
+		btnc4.addActionListener(this);
+		
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		numero1 = Integer.parseInt(num1.getText());
+		numero2 = Integer.parseInt(num2.getText());
+
+		if(e.getSource() == btnc1){
+
+			suma = numero1 + numero2;
+			String sumaResultado = Integer.toString(suma);
+			etiq1.setText(sumaResultado);
+		}
+		
+		if(e.getSource() == btnc2){
+		
+			resta = numero1 - numero2;
+			String restaResultado = Integer.toString(resta);
+			etiq1.setText(restaResultado);
+		}
+
+		if(e.getSource() == btnc3){
+			mult = numero1 * numero2;
+			String multResultado = Integer.toString(mult);
+			etiq1.setText(multResultado);
+		}
+
+		if(e.getSource() == btnc4){
+			div = numero1 / numero2;
+			String divResultado =Integer.toString(div);
+			etiq1.setText(divResultado);
+		}	
+	}
+	
+	public static void main (String args[]){
+		Calculadora calc1 = new P8();
+		calc1.setBounds(550,550,500,180);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+}
+
+
+
+
+/* Problema 9 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class CompararNum extends JFrame implements ActionListener{
+	JButton btnc1;
+	JLabel etiq1;
+	JTextField num1, num2, num3;
+	int numero1, numero2, numero3;
+	//float numero;
+	
+	public P9(){
+		setLayout(null);
+		
+		num1 = new JTextField (5);
+    		num1.setBounds(20,50,50,30); 
+
+    		num2 = new JTextField (5);
+    		num2.setBounds(90,50,50,30);
+
+    		num3 = new JTextField (5);
+    		num3.setBounds(160,50,50,30);
+
+		btnc1 = new JButton ("Comparar");
+    		btnc1.setBounds(230,50,100,30);
+		
+		etiq1 = new JLabel("****");
+    		etiq1.setBounds(370,50,100,30);
+		
+		add(btnc1); add(etiq1); add(num1); add(num2); add(num3);
+		btnc1.addActionListener(this);
+		
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		numero1 = Integer.parseInt(num1.getText());
+		numero2 = Integer.parseInt(num2.getText());
+		numero3 = Integer.parseInt(num3.getText());
+
+		if(numero1 > numero2 && numero1 > numero3)
+			etiq1.setText("Numero 1");
+
+		else if(numero2 > numero1 && numero2 > numero3)
+			etiq1.setText("Numero 2");
+
+		else if(numero3 > numero1 && numero3 > numero2)
+			etiq1.setText("Numero 3");
+	}
+	
+	public static void main (String args[]){
+		CompararNum calc1 = new P9();
+		calc1.setBounds(550,550,500,180);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+}
+
+
+
+
+/* Problema 10 */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+
+public class Muestra extends JFrame implements ActionListener{
+	JButton btnc1, btnc2, btnc3;
+	JLabel etiq1;
+	//JTextField num1, num2;
+	int numero1, numero2;
+	
+	public P10(){
+		setLayout(null);
+		
+		btnc1 = new JButton ("Manzana");
+    		btnc1.setBounds(10,50,100,30);
+
+    		btnc2 = new JButton ("Limon");
+    		btnc2.setBounds(130,50,100,30);
+
+    		btnc3 = new JButton ("Naranja");
+    		btnc3.setBounds(250,50,100,30);
+
+		etiq1 = new JLabel("*****");
+    		etiq1.setBounds(400,50,100,30);
+	
+    	
+		add(btnc1); add(btnc2); add(btnc3); add(etiq1);
+		btnc1.addActionListener(this);
+		btnc2.addActionListener(this);
+		btnc3.addActionListener(this);	
+	}
+	
+	public void actionPerformed(ActionEvent e){
+
+		if(e.getSource() == btnc1){
+			etiq1.setText("Manzana");
+		}
+		
+		if(e.getSource() == btnc2){
+			etiq1.setText("Limon");
+		}
+
+		if(e.getSource() == btnc3){
+			etiq1.setText("Naranja");
+		}	
+	}
+	
+	public static void main (String args[]){
+		Muestra calc1 = new P10();
+		calc1.setBounds(550,550,500,180);
+		calc1.setVisible(true);
+		calc1.setLocationRelativeTo(null);
+		calc1.setResizable(false);
+	}
+}	     

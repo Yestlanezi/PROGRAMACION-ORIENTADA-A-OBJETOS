@@ -1,0 +1,14 @@
+Moreno Lozano Omar
+2CM3
+Programación Orientada a Objetos
+-------------------------------------
+Album Fotografico.
+-------------------------------------
+Compilación:
+
+javac Album.java
+-------------------------------------
+Ejecución:
+
+java Album
+-------------------------------------
